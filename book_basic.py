@@ -1,23 +1,23 @@
 from flask import Flask, request, jsonify
 from flask_basicauth import BasicAuth
 
-# Sample data (in-memory database for simplicity)
-books = [
-    {"id": 1, "title": "Book 1", "author": "Author 1"},
-    {"id": 2, "title": "Book 2", "author": "Author 2"},
-    {"id": 3, "title": "Book 3", "author": "Author 3"}
-]
-
 app = Flask(__name__)
+
+@app.route("/")
+def hello_world():
+    return "<p>Hello, World!</p>"
 
 # Basic authentication configuration
 app.config['BASIC_AUTH_USERNAME'] = 'username'
 app.config['BASIC_AUTH_PASSWORD'] = 'password'
 basic_auth = BasicAuth(app)
 
-@app.route("/")
-def hello_world():
-    return"<p>Hello,World!</p>"
+# Sample data (in-memory database for simplicity)
+books = [
+    {"id": 1, "title": "Book 1", "author": "Author 1"},
+    {"id": 2, "title": "Book 2", "author": "Author 2"},
+    {"id": 3, "title": "Book 3", "author": "Author 3"}
+]
 
 # Create (POST) operation
 @app.route('/books', methods=['POST'])
@@ -71,4 +71,4 @@ def delete_book(book_id):
     return jsonify({"message": "Book deleted successfully"})
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5001, debug=True)
+    app.run(host="0.0.0.0", port=5002, debug=True)

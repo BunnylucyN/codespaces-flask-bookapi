@@ -1,11 +1,8 @@
 from flask import Flask, request, jsonify
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token
 
-app = Flask(__name__)
 
-@app.route("/")
-def hello_world():
-    return"<p>Hello,World!</p>"
+app = Flask(__name__)
 
 # Set up JWT
 app.config['JWT_SECRET_KEY'] = 'your_jwt_secret_key'
@@ -17,6 +14,10 @@ books = [
     {"id": 2, "title": "Book 2", "author": "Author 2"},
     {"id": 3, "title": "Book 3", "author": "Author 3"}
 ]
+
+@app.route("/")
+def hello_world():
+    return "<p>Hello, World!</p>"
 
 # Authentication endpoint to get JWT token
 @app.route('/login', methods=['POST'])
